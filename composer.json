@@ -1,0 +1,35 @@
+{
+	"name": "mediawiki/minus-x",
+	"description": "Removes executable bit from files that shouldn't be executable",
+	"license": "GPL-3.0+",
+	"authors": [
+		{
+			"name": "Kunal Mehta",
+			"email": "legoktm@member.fsf.org"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9",
+		"symfony/console": "3.3.5"
+	},
+	"require-dev": {
+		"jakub-onderka/php-parallel-lint": "0.9.2",
+		"jakub-onderka/php-console-highlighter": "0.3.2",
+		"mediawiki/mediawiki-codesniffer": "0.12.0"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor",
+			"phpcs -sp"
+		],
+		"fix": "phpcbf"
+	},
+	"autoload": {
+		"psr-4": {
+			"MediaWiki\\MinusX\\": "src/"
+		}
+	},
+	"bin": [
+		"bin/minus-x.php"
+	]
+}
