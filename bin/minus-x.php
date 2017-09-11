@@ -20,7 +20,25 @@
  * @file
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+// This file can be located in ./bin/minus-x.php
+// or ./vendor/mediawiki/minus-x/bin/minus-x.php
+$autoload = [
+	__DIR__ . '/../../../../vendor/autoload.php',
+	__DIR__ . '/../vendor/autoload.php',
+];
+$found = false;
+foreach ( $autoload as $file ) {
+	if ( file_exists( $file ) ) {
+		require_once $file;
+		$found = true;
+		break;
+	}
+}
+
+if ( !$found ) {
+	echo "Error, unable to find composer autoloader.\n";
+	die( 1 );
+}
 
 use MediaWiki\MinusX\CheckCommand;
 use MediaWiki\MinusX\FixCommand;
