@@ -14,11 +14,11 @@ It can be installed via composer:
 
 Usage:
 
-`minus-x.php check .`
+`minus-x check .`
 
 And to automatically fix errors:
 
-`minus-x.php fix .`
+`minus-x fix .`
 
 
 If you need to whitelist a specific file, create a `.minus-x.json` in
