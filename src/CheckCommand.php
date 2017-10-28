@@ -147,6 +147,12 @@ class CheckCommand extends Command {
 				return realpath( $path . '/' . $a );
 			}, $config['ignore'] );
 		}
+
+		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) {
+			// On Windows, is_executable() always returns true, so whitelist those
+			// files
+			$this->whitelist[] = 'application/x-dosexec';
+		}
 	}
 
 	/**
