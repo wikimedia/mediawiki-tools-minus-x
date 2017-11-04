@@ -2,11 +2,11 @@ MinusX
 ======
 
 MinusX is a utility that finds files that shouldn't have a
-[UNIX executable mode](https://en.wikipedia.org/wiki/Modes_(Unix)).
+[UNIX executable mode](https://en.wikipedia.org/wiki/Modes_%28Unix%29).
 
 Files that are marked as executable must either have a MIME type of
 `application/x-executable` or `application/x-sharedlib`, or start with
-a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)).
+a [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).
 
 It can be installed via composer:
 
