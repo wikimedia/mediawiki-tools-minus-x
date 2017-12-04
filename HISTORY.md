@@ -1,5 +1,9 @@
 # MinusX release history #
 
+## 0.2.1 / 2017-12-03 ##
+* Percent-encode URLs in `README.md` to work around bad parsers. (MZMcBride)
+* Use env instead of /usr/bin/php directly (Sam Wilson)
+
 ## 0.2.0 / 2017-10-30 ##
 * Don't use SplFileObject::fread() for PHP < 5.5.11 support (Kunal Mehta)
 * Drop .php extension from minus-x command (Kunal Mehta)
