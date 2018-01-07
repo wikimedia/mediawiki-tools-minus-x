@@ -21,13 +21,16 @@ And to automatically fix errors:
 `minus-x fix .`
 
 
-If you need to whitelist a specific file, create a `.minus-x.json` in
-the repository root:
+If you need to whitelist a specific file or directory, create a
+`.minus-x.json` in the repository root:
 
 ```
 {
 	"ignore": [
 		"./bin/executable"
+	],
+	"ignoreDirectories": [
+		"./extensions"
 	]
 }
 ```

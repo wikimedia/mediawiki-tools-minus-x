@@ -36,7 +36,7 @@ class CheckCommand extends Command {
 	 *
 	 * @var string[]
 	 */
-	protected $ignoredDirs = [
+	protected $defaultIgnoredDirs = [
 		'.git',
 		'vendor',
 		'node_modules',
@@ -58,6 +58,13 @@ class CheckCommand extends Command {
 	 * @var string[]
 	 */
 	protected $ignoredFiles = [];
+
+	/**
+	 * Ignored directories from .minus-x.json
+	 *
+	 * @var string[]
+	 */
+	protected $ignoredDirs = [];
 
 	/**
 	 * @var InputInterface
@@ -148,6 +155,12 @@ class CheckCommand extends Command {
 			}, $config['ignore'] );
 		}
 
+		if ( isset( $config['ignoreDirectories'] ) ) {
+			$this->ignoredDirs = array_map( function ( $a ) use ( $path ) {
+				return realpath( $path . '/' . $a );
+			}, $config['ignoreDirectories'] );
+		}
+
 		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) {
 			// On Windows, is_executable() always returns true, so whitelist those
 			// files
@@ -190,6 +203,28 @@ class CheckCommand extends Command {
 	}
 
 	/**
+	 * Filter out ignored directories, split into a separate
+	 * function for easier readability. Used by
+	 * RecursiveCallbackFilterIterator
+	 *
+	 * @param SplFileInfo $current File/directory to check
+	 * @return bool
+	 */
+	public function filterDirs( SplFileInfo $current ) {
+		if ( $current->isDir() ) {
+			if ( in_array( $current->getFilename(), $this->defaultIgnoredDirs ) ) {
+				// Default ignored directories can be anywhere in the directory structure
+				return false;
+			} elseif ( in_array( $current->getRealPath(), $this->ignoredDirs ) ) {
+				// Ignored dirs are relative to root, and stored as absolute paths
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Recursively search a directory and check it
 	 *
 	 * @param string $path Directory
@@ -199,12 +234,7 @@ class CheckCommand extends Command {
 		$iterator = new RecursiveIteratorIterator(
 			new RecursiveCallbackFilterIterator(
 				new RecursiveDirectoryIterator( $path ),
-				function ( SplFileInfo $current, $key, $iterator ) {
-					if ( $current->isDir() && in_array( $current->getFilename(), $this->ignoredDirs ) ) {
-						return false;
-					}
-					return true;
-				}
+				[ $this, 'filterDirs' ]
 			)
 		);
 		$bad = [];
