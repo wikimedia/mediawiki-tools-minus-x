@@ -1,5 +1,9 @@
 # MinusX release history #
 
+## 0.3.0 / 2018-01-10 ##
+* Loosen symfony/console dependency (Kunal Mehta)
+* Support ignoring entire directories (Kunal Mehta)
+
 ## 0.2.1 / 2017-12-03 ##
 * Percent-encode URLs in `README.md` to work around bad parsers. (MZMcBride)
 * Use env instead of /usr/bin/php directly (Sam Wilson)
