@@ -1,0 +1,5 @@
+.gitattributes export-ignore
+.gitignore export-ignore
+.gitreview export-ignore
+composer.json export-ignore
+.phpcs.xml export-ignore
