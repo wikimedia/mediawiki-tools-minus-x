@@ -1,5 +1,8 @@
 # MinusX release history #
 
+## 0.3.1 / 2018-02-17 ##
+* Add .gitattributes with export-ignore (Umherirrender)
+
 ## 0.3.0 / 2018-01-10 ##
 * Loosen symfony/console dependency (Kunal Mehta)
 * Support ignoring entire directories (Kunal Mehta)
