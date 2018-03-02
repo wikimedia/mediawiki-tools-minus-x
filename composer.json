@@ -1,7 +1,7 @@
 {
 	"name": "mediawiki/minus-x",
 	"description": "Removes executable bit from files that shouldn't be executable",
-	"license": "GPL-3.0+",
+	"license": "GPL-3.0-or-later",
 	"homepage": "https://www.mediawiki.org/wiki/MinusX",
 	"authors": [
 		{
