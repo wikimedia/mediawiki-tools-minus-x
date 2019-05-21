@@ -35,6 +35,7 @@ If you need to whitelist a specific file or directory, create a
 }
 ```
 
+The directories `.git`, `vendor`, and `node_modules` are always ignored.
 
 MinusX is licensed under the terms of the GPL, v3 or later. See COPYING
 for more details.
