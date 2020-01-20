@@ -285,9 +285,7 @@ class CheckCommand extends Command {
 		}
 
 		// Check for a shebang in the first 5 bytes
-		$file = fopen( $file->getRealPath(), 'r' );
-		$start = fread( $file, 5 );
-		fclose( $file );
+		$start = $file->openFile()->fread( 5 );
 		return strpos( $start, '#!' ) === 0;
 	}
 }
