@@ -1,5 +1,11 @@
 # MinusX release history #
 
+## 1.0.0 / 2020-01-20 ##
+* Mention always ignored directories in the readme (mainframe98)
+* Permit symfony/console version 5 (Sam Wilson)
+* Drop support for earlier versions of symfony/console (Kunal Mehta)
+* Revert "Don't use SplFileObject::fread() for PHP < 5.5.11 support" (Kunal Mehta)
+
 ## 0.3.2 / 2018-10-02 ##
 * Support using symfony/console ^4 (Kunal Mehta)
 * Use SPDX 3.0 license identifier (Umherirrender)
