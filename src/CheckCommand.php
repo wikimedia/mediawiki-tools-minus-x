@@ -49,7 +49,9 @@ class CheckCommand extends Command {
 	 */
 	protected $whitelist = [
 		'application/x-executable',
-		'application/x-sharedlib'
+		'application/x-sharedlib',
+		'application/x-pie-executable',
+		'application/x-mach-binary',
 	];
 
 	/**
