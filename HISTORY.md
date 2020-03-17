@@ -1,5 +1,8 @@
 # MinusX release history #
 
+## 1.1.0 / 2020-03-17 ##
+* Add application/x-pie-executable and x-mach-binary to whitelist (Umherirrender)
+
 ## 1.0.0 / 2020-01-20 ##
 * Mention always ignored directories in the readme (mainframe98)
 * Permit symfony/console version 5 (Sam Wilson)
