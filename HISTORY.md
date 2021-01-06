@@ -1,5 +1,8 @@
 # MinusX release history #
 
+## 1.1.1 / 2021-01-05 ##
+* Restore support of symfony/console ^3.3.5 and ^4 (Kunal Mehta)
+
 ## 1.1.0 / 2020-03-17 ##
 * Add application/x-pie-executable and x-mach-binary to whitelist (Umherirrender)
 
