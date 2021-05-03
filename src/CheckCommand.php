@@ -152,13 +152,13 @@ class CheckCommand extends Command {
 		}
 
 		if ( isset( $config['ignore'] ) ) {
-			$this->ignoredFiles = array_map( function ( $a ) use ( $path ) {
+			$this->ignoredFiles = array_map( static function ( $a ) use ( $path ) {
 				return realpath( $path . '/' . $a );
 			}, $config['ignore'] );
 		}
 
 		if ( isset( $config['ignoreDirectories'] ) ) {
-			$this->ignoredDirs = array_map( function ( $a ) use ( $path ) {
+			$this->ignoredDirs = array_map( static function ( $a ) use ( $path ) {
 				return realpath( $path . '/' . $a );
 			}, $config['ignoreDirectories'] );
 		}
