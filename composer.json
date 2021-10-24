@@ -14,16 +14,17 @@
 		"symfony/console": "^3.3.5 || ^4 || ^5"
 	},
 	"require-dev": {
-		"mediawiki/mediawiki-codesniffer": "37.0.0",
+		"mediawiki/mediawiki-codesniffer": "38.0.0",
 		"php-parallel-lint/php-console-highlighter": "0.5.0",
-		"php-parallel-lint/php-parallel-lint": "1.3.0"
+		"php-parallel-lint/php-parallel-lint": "1.3.1"
 	},
 	"scripts": {
 		"test": [
 			"parallel-lint . bin/minus-x --exclude vendor",
-			"phpcs -sp"
+			"@phpcs"
 		],
-		"fix": "phpcbf"
+		"fix": "phpcbf",
+		"phpcs": "phpcs -sp"
 	},
 	"autoload": {
 		"psr-4": {
