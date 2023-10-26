@@ -20,5 +20,7 @@ project.index
 ## Sublime
 sublime-*
 sftp-config.json
+## JetBrains IDEs
+.idea
 
 /doc/

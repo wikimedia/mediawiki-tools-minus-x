@@ -280,7 +280,7 @@ class CheckCommand extends Command {
 			return true;
 		}
 
-		list( $type, $subtype ) = explode( '/', $mime, 2 );
+		[ $type, $subtype ] = explode( '/', $mime, 2 );
 		// If the mime type isn't application/ or text/ don't check for a shebang
 		if ( !in_array( $type, [ 'application', 'text' ] ) ) {
 			return false;
