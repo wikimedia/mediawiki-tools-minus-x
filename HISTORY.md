@@ -1,5 +1,8 @@
 # MinusX release history #
 
+## 1.1.2 / 2024-05-04 ##
+* Support symfony/console v7 (Sam Wilson)
+
 ## 1.1.1 / 2021-01-05 ##
 * Restore support of symfony/console ^3.3.5 and ^4 (Kunal Mehta)
 
