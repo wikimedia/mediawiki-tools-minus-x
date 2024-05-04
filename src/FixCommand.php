@@ -48,7 +48,7 @@ class FixCommand extends CheckCommand {
 	 *
 	 * @return int Status code
 	 */
-	protected function execute( InputInterface $input, OutputInterface $output ) {
+	protected function execute( InputInterface $input, OutputInterface $output ): int {
 		$this->output = $output;
 		$this->input = $input;
 		$path = $this->setup();
