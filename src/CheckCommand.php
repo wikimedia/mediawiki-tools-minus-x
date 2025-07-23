@@ -47,7 +47,7 @@ class CheckCommand extends Command {
 	 *
 	 * @var string[]
 	 */
-	protected $whitelist = [
+	protected $allowed = [
 		'application/x-executable',
 		'application/x-sharedlib',
 		'application/x-pie-executable',
@@ -164,9 +164,9 @@ class CheckCommand extends Command {
 		}
 
 		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) {
-			// On Windows, is_executable() always returns true, so whitelist those
+			// On Windows, is_executable() always returns true, so allow those
 			// files
-			$this->whitelist[] = 'application/x-dosexec';
+			$this->$allowed[] = 'application/x-dosexec';
 		}
 	}
 
@@ -247,7 +247,7 @@ class CheckCommand extends Command {
 				continue;
 			}
 
-			// Skip whitelisted files
+			// Skip allowed files
 			if ( in_array( $file->getPathname(), $this->ignoredFiles ) ) {
 				$this->progress( 'S' );
 				continue;
@@ -275,8 +275,7 @@ class CheckCommand extends Command {
 	 */
 	protected function checkFile( SplFileInfo $file ) {
 		$mime = mime_content_type( $file->getPathname() );
-		if ( in_array( $mime, $this->whitelist ) ) {
-			// Whitelisted
+		if ( in_array( $mime, $this->$allowed ) ) {
 			return true;
 		}
 
