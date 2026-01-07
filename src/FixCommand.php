@@ -3,7 +3,7 @@
  * MinusX - fixes files that shouldn't have an executable bit
  * Copyright (C) 2017 Kunal Mehta <legoktm@member.fsf.org>
  *
- * @license GPL-2.0-or-later
+ * @license GPL-3.0-or-later
  *
  * @file
  */
