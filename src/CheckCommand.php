@@ -3,18 +3,7 @@
  * MinusX - checks files that shouldn't have an executable bit
  * Copyright (C) 2017 Kunal Mehta <legoktm@member.fsf.org>
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @license GPL-2.0-or-later
  *
  * @file
  */
@@ -33,10 +22,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CheckCommand extends Command {
 	/**
 	 * Directories to ignore
-	 *
-	 * @var string[]
 	 */
-	protected $defaultIgnoredDirs = [
+	protected array $defaultIgnoredDirs = [
 		'.git',
 		'vendor',
 		'node_modules',
@@ -44,10 +31,8 @@ class CheckCommand extends Command {
 
 	/**
 	 * Mime types that can always be executable
-	 *
-	 * @var string[]
 	 */
-	protected $allowed = [
+	protected array $allowed = [
 		'application/x-executable',
 		'application/x-sharedlib',
 		'application/x-pie-executable',
@@ -56,34 +41,21 @@ class CheckCommand extends Command {
 
 	/**
 	 * Ignored files from .minus-x.json
-	 *
-	 * @var string[]
 	 */
-	protected $ignoredFiles = [];
+	protected array $ignoredFiles = [];
 
 	/**
 	 * Ignored directories from .minus-x.json
-	 *
-	 * @var string[]
 	 */
-	protected $ignoredDirs = [];
+	protected array $ignoredDirs = [];
 
-	/**
-	 * @var InputInterface
-	 */
-	protected $input;
-
-	/**
-	 * @var OutputInterface
-	 */
-	protected $output;
+	protected InputInterface $input;
+	protected OutputInterface $output;
 
 	/**
 	 * How many progress markers we've output so far
-	 *
-	 * @var int
 	 */
-	protected $progressCount = 0;
+	protected int $progressCount = 0;
 
 	/**
 	 * Initialize command
@@ -103,7 +75,7 @@ class CheckCommand extends Command {
 	 *
 	 * @param string $marker Either ".", "E" or "S"
 	 */
-	protected function progress( $marker ) {
+	protected function progress( string $marker ) {
 		$this->output->write( $marker );
 		$this->progressCount++;
 		if ( $this->progressCount > 60 ) {
@@ -117,7 +89,7 @@ class CheckCommand extends Command {
 	 *
 	 * @return int|string If an int, it should be the status code to exit with
 	 */
-	protected function setup() {
+	protected function setup(): string|int {
 		$this->output->writeln( [
 			'MinusX',
 			'======',
@@ -139,10 +111,10 @@ class CheckCommand extends Command {
 	 * @param string $path Root directory that JSON file should be in
 	 * @return int|null If an int, status code to exit with
 	 */
-	protected function loadConfig( $path ) {
+	protected function loadConfig( string $path ): ?int {
 		$confPath = $path . '/.minus-x.json';
 		if ( !file_exists( $confPath ) ) {
-			return;
+			return null;
 		}
 
 		$config = json_decode( file_get_contents( $confPath ), true );
@@ -166,8 +138,10 @@ class CheckCommand extends Command {
 		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) {
 			// On Windows, is_executable() always returns true, so allow those
 			// files
-			$this->$allowed[] = 'application/x-dosexec';
+			$this->allowed[] = 'application/x-dosexec';
 		}
+
+		return null;
 	}
 
 	/**
@@ -186,7 +160,7 @@ class CheckCommand extends Command {
 			return $path;
 		}
 		$err = $this->loadConfig( $path );
-		if ( is_int( $err ) ) {
+		if ( $err !== null ) {
 			return $err;
 		}
 
@@ -232,7 +206,7 @@ class CheckCommand extends Command {
 	 * @param string $path Directory
 	 * @return SplFileInfo[]
 	 */
-	protected function checkPath( $path ) {
+	protected function checkPath( string $path ): array {
 		$iterator = new RecursiveIteratorIterator(
 			new RecursiveCallbackFilterIterator(
 				new RecursiveDirectoryIterator( $path ),
@@ -273,9 +247,9 @@ class CheckCommand extends Command {
 	 * @param SplFileInfo $file File to check
 	 * @return bool If true, its OK to be executable
 	 */
-	protected function checkFile( SplFileInfo $file ) {
+	protected function checkFile( SplFileInfo $file ): bool {
 		$mime = mime_content_type( $file->getPathname() );
-		if ( in_array( $mime, $this->$allowed ) ) {
+		if ( in_array( $mime, $this->allowed ) ) {
 			return true;
 		}
 
