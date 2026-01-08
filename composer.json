@@ -11,6 +11,7 @@
 	],
 	"require": {
 		"php": ">=8.2",
+		"ext-fileinfo": "*",
 		"symfony/console": "^6 || ^7"
 	},
 	"require-dev": {

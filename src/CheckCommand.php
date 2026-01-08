@@ -60,7 +60,7 @@ class CheckCommand extends Command {
 	/**
 	 * Initialize command
 	 */
-	protected function configure() {
+	protected function configure(): void {
 		$this->setName( 'check' )
 			->setDescription( 'Checks files for executable bits they shouldn\'t have' )
 			->addArgument(
@@ -75,7 +75,7 @@ class CheckCommand extends Command {
 	 *
 	 * @param string $marker Either ".", "E" or "S"
 	 */
-	protected function progress( string $marker ) {
+	protected function progress( string $marker ): void {
 		$this->output->write( $marker );
 		$this->progressCount++;
 		if ( $this->progressCount > 60 ) {
@@ -172,10 +172,11 @@ class CheckCommand extends Command {
 				$output->writeln( "Error: {$file->getPathname()} should not be executable" );
 			}
 			return 1;
-		} else {
-			$output->writeln( 'All good!' );
-			return 0;
 		}
+
+		$output->writeln( 'All good!' );
+
+		return 0;
 	}
 
 	/**
@@ -186,13 +187,14 @@ class CheckCommand extends Command {
 	 * @param SplFileInfo $current File/directory to check
 	 * @return bool
 	 */
-	public function filterDirs( SplFileInfo $current ) {
+	public function filterDirs( SplFileInfo $current ): bool {
 		if ( $current->isDir() ) {
-			if ( in_array( $current->getFilename(), $this->defaultIgnoredDirs ) ) {
+			if (
 				// Default ignored directories can be anywhere in the directory structure
-				return false;
-			} elseif ( in_array( $current->getRealPath(), $this->ignoredDirs ) ) {
+				in_array( $current->getFilename(), $this->defaultIgnoredDirs ) ||
 				// Ignored dirs are relative to root, and stored as absolute paths
+				in_array( $current->getRealPath(), $this->ignoredDirs )
+			) {
 				return false;
 			}
 		}
@@ -245,7 +247,7 @@ class CheckCommand extends Command {
 
 	/**
 	 * @param SplFileInfo $file File to check
-	 * @return bool If true, its OK to be executable
+	 * @return bool If true, it's OK to be executable
 	 */
 	protected function checkFile( SplFileInfo $file ): bool {
 		$mime = mime_content_type( $file->getPathname() );
@@ -261,6 +263,6 @@ class CheckCommand extends Command {
 
 		// Check for a shebang in the first 5 bytes
 		$start = $file->openFile()->fread( 5 );
-		return strpos( $start, '#!' ) === 0;
+		return str_starts_with( $start, '#!' );
 	}
 }

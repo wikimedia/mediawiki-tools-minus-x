@@ -19,7 +19,7 @@ class FixCommand extends CheckCommand {
 	/**
 	 * Initialize command
 	 */
-	protected function configure() {
+	protected function configure(): void {
 		$this->setName( 'fix' )
 			->setDescription( 'Removes executable bit from files that shouldn\'t have it' )
 			->addArgument(
@@ -65,11 +65,11 @@ class FixCommand extends CheckCommand {
 	}
 
 	/**
-	 * Remove executable bit from file
+	 * Remove executable bit from the file
 	 *
 	 * @param string $filepath File
 	 */
-	protected function minusX( string $filepath ) {
+	protected function minusX( string $filepath ): void {
 		chmod( $filepath, fileperms( $filepath ) & ~0111 );
 	}
 
