@@ -12,7 +12,7 @@
 	"require": {
 		"php": ">=8.2",
 		"ext-fileinfo": "*",
-		"symfony/console": "^6 || ^7"
+		"symfony/console": "^6 || ^7 || ^8"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "48.0.0",
