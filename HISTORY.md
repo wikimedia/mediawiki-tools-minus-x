@@ -1,5 +1,11 @@
 # MinusX release history #
 
+## 2.0.0 / 2026-01-10 ##
+* Support symfony/console v8 (Alexander Vorwerk)
+* Require `ext-fileinfo` in composer.json (Sam Reed)
+* Drop support for symfony/console v3, v4, and v5 (Alexander Vorwerk)
+* Drop support for PHP < 8.2 (James Forrester, Alexander Vorwerk)
+
 ## 1.1.3 / 2024-05-04 ##
 * Support symfony/console v7 for the fix command (Sam Wilson)
 
