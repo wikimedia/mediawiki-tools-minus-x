@@ -34,6 +34,6 @@ use MediaWiki\MinusX\FixCommand;
 use Symfony\Component\Console\Application;
 
 $app = new Application();
-$app->add( new CheckCommand() );
-$app->add( new FixCommand() );
+$app->addCommand( new CheckCommand() );
+$app->addCommand( new FixCommand() );
 $app->run();
