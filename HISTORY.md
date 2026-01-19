@@ -1,5 +1,8 @@
 # MinusX release history #
 
+## 2.0.1 / 2026-01-19 ##
+* Change deprecated Application::add() to Application::addCommands() (Umherirrender)
+
 ## 2.0.0 / 2026-01-10 ##
 * Support symfony/console v8 (Alexander Vorwerk)
 * Require `ext-fileinfo` in composer.json (Sam Reed)
