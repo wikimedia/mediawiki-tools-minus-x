@@ -1,4 +1,6 @@
 <?php
+declare( strict_types = 1 );
+
 /**
  * MinusX - checks files that shouldn't have an executable bit
  * Copyright (C) 2017 Kunal Mehta <legoktm@member.fsf.org>
